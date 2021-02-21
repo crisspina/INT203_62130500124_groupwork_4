@@ -101,14 +101,13 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-black w-full h-screen" v-show="expandPhoto">
+            <div class="bg-black w-full h-screen justify-center" v-show="expandPhoto">
                 <!-- bg -->
                 <div class="h-1/6 flex justify-end">
-                    <button @click="expandPic" class="material-icons h-1/2 text-5xl mr-8 mt-2 text-white">close</button>
+                    <button @click="expandPic" class="material-icons h-10 text-4xl mr-5 mt-4 text-white">close</button>
                 </div>
-                <!-- display expand photo -->
                 <div class="flex justify-center">
-                    <img class="h-full pb-2 -mt-8" :src="photoIndex">
+                    <img class="h-96 " :src="photoIndex">
                 </div>
             </div>
         </div>
