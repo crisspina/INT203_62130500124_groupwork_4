@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Vue Js - HelloWorld App</title>
+
+    <!-- https://google.github.io/material-design-icons/#icon-font-for-the-web -->
+    <!-- Using via Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <!-- https://tailwindcss.com/docs/installation -->
+    <!-- Using Tailwind via CDN -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+
+    <!-- https://v3.vuejs.org/guide/installation.html#release-notes -->
+    <!-- Vue CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <link rel="stylesheet" href="styles.css" />
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <div class="row py-5 px-4">
+            <div class="col-md-5 mx-96">
+                <!-- Profile widget -->
+                <div class="bg-white shadow rounded overflow-hidden">
+                    <div class="px-4 pt-0 pb-4 cover">
+                        <div class="media align-items-end profile-head grid grid-cols-2">
+                            <div class="profile mr-3"><img src="./images/member.jpeg" alt="profile" width="200"
+                                    class="rounded-md mb-2 img-thumbnail shadow-xl">
+                            </div>
+                            <div class="media-body mb-5 text-white">
+                                <h4 class="mt-0 mb-0">{{name}}</h4>
+                                <p class="text-xs mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>{{type}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="py-4 px-4 mt-16">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <!-- show number  -->
+                            <h6>Why Don't We Gallery: {{countofphotos }}</h6>
+                            <!-- show total like -->
+                            <h6>Total Likes: {{ countLike }} </h6>
+                            <!-- search icon -->
+                            <button v-on:click="isHidden = !isHidden" :class="{show: isHidden == false}">
+                                <!-- icon from material-icon -->
+                                <span class="material-icons p-1 rounded-sm focus:outline-none">
+                                    search
+                                </span>
+                            </button>
+                            <!-- search form -->
+                            <div class="searchForm" v-if="isHidden == false">
+                                <input v-model="inputSearch"
+                                    class="rounded-md ml-2 p-1 w-80 placeholder-gray-500 placeholder-opacity-50 focus:outline-none text-black rounded-sm"
+                                    type="text" placeholder="Please enter text for searching photos">
+                                <button class="ml-2 p-1 rounded-sm focus:outline-none bg-blue-500 text-white"
+                                    v-on:click="toggleCancel">Cancel</button>
+                            </div>
+
+                        </div>
+                        <div class="row" class="col-lg-6 mb-2 pr-lg-1 ">
+                            <div>
+                                <ul>
+                                    <!-- show photo list -->
+                                    <li v-for="(photo,index) in filteredSearch" :key="photos.title"
+                                        v-if="filteredSearch.length !== 0">
+                                        <p>{{photo.title}}</p>
+                                        <img :src="photo.src" class="rounded shadow-sm my-6 ">
+                                        <!-- show icon -->
+                                        <div class="flex flex-row justify-end space-x-1">
+                                            <!-- icon heart -->
+                                            <button class='' @click="favIcon(index)">
+                                                <svg class="fill-current text-red-500"
+                                                    xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"
+                                                    width="24">
+                                                    <path d="M0 0h24v24H0z" fill="none" />
+                                                    <path
+                                                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                                </svg>
+                                            </button>
+
+                                    </li>
+                                </ul>
+                                <!-- not found -->
+                                <div v-else>
+                                    <h4 class="text-black">
+                                        <span class="font-semibold italic text-red-500">{{inputSearch}}</span> is not found</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- my main.js -->
+    <script src="./main.js"></script>
+</body>
+
+</html>
