@@ -18,6 +18,7 @@
     <!-- Vue CDN -->
     <script src="https://unpkg.com/vue@next"></script>
 
+    <!-- styless.css -->
     <link rel="stylesheet" href="styles.css" />
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
     <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
@@ -28,7 +29,7 @@
 <body>
     <div id="app">
         <div class="row py-5 px-4">
-            <div class="col-md-5 mx-96">
+            <div class="col-md-5 mx-96" v-show="!expandPhoto" >
                 <!-- Profile widget -->
                 <div class="bg-white shadow rounded overflow-hidden">
                     <div class="px-4 pt-0 pb-4 cover">
@@ -67,42 +68,51 @@
 
                         </div>
                         <div class="row" class="col-lg-6 mb-2 pr-lg-1 ">
-                            <div>
-                                <ul>
-                                    <!-- show photo list -->
-                                    <li v-for="(photo,index) in filteredSearch" :key="photos.title"
-                                        v-if="filteredSearch.length !== 0">
-                                        <p>{{photo.title}}</p>
-                                        <img :src="photo.src" class="rounded shadow-sm my-6 ">
-                                        <!-- show icon -->
-                                        <div class="flex flex-row justify-end space-x-1">
-                                            <!-- icon heart -->
-                                            <button class='' @click="favIcon(index)">
-                                                <svg class="fill-current text-red-500"
-                                                    xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"
-                                                    width="24">
-                                                    <path d="M0 0h24v24H0z" fill="none" />
-                                                    <path
-                                                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                                </svg>
-                                            </button>
 
-                                    </li>
-                                </ul>
-                                <!-- not found -->
-                                <div v-else>
-                                    <h4 class="text-black">
-                                        <span class="font-semibold italic text-red-500">{{inputSearch}}</span> is not found</h4>
+                            <!-- show photo list -->
+
+                            <div  v-for="(photo,index) in filteredSearch" :key="photos.id"
+                                v-if="filteredSearch.length !== 0">
+                                <p>{{photo.title}}</p>
+                                <img class="rounded shadow-sm my-3" :src="photo.src" @click="expandPic(photo.src)">
+                                <!-- show icon -->
+                                <div class="flex flex-row justify-end space-x-1">
+                                    <!-- icon heart -->
+                                    <button class='mb-6' @click="favIcon(index)">
+                                        <svg class="fill-current text-red-500" xmlns="http://www.w3.org/2000/svg"
+                                            height="24" viewBox="0 0 24 24" width="24">
+                                            <path d="M0 0h24v24H0z" fill="none" />
+                                            <path
+                                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
+                            <!-- not found -->
+                            <div v-else>
+                                <h4 class="text-black">
+                                    <span class="italic text-red-500">{{inputSearch}}</span> is not found
+                                </h4>
+                            </div>
+
+                            <!-- expand -->
+
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="bg-black w-full h-screen" v-show="expandPhoto">
+                <!-- bg -->
+                <div class="h-1/6 flex justify-end">
+                    <button @click="expandPic" class="material-icons h-1/2 text-5xl mr-8 mt-2 text-white">close</button>
+                </div>
+                <!-- display expand photo -->
+                <div class="flex justify-center">
+                    <img class="h-full pb-2 -mt-8" :src="photoIndex">
+                </div>
+            </div>
         </div>
     </div>
-
-
     <!-- my main.js -->
     <script src="./main.js"></script>
 </body>
