@@ -38,7 +38,7 @@
                                     class="rounded-md mb-2 img-thumbnail shadow-xl">
                             </div>
                             <div class="media-body mb-5 text-white">
-                                <h4 class="mt-0 mb-0">{{name}}</h4>
+                                <h4 class="mt-0 mb-0 ">{{name}}</h4>
                                 <p class="text-xs mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>{{type}}</p>
                             </div>
                         </div>
@@ -47,11 +47,11 @@
                     <div class="py-4 px-4 mt-16">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <!-- show number  -->
-                            <h6>Why Don't We Gallery: {{countofphotos }}</h6>
+                            <h6 class="font-black">Why Don't We Gallery: {{countofphotos }}</h6>
                             <!-- show total like -->
-                            <h6>Total Likes: {{ countLike }} </h6>
+                            <h6 class="font-black">Total Likes: {{ countLike }} </h6>
                             <!-- search icon -->
-                            <button v-on:click="isHidden = !isHidden" :class="{show: isHidden == false}">
+                            <button  v-on:click="isHidden = !isHidden" :class="{show: isHidden == false}">
                                 <!-- icon from material-icon -->
                                 <span class="material-icons p-1 rounded-sm focus:outline-none">
                                     search
@@ -73,7 +73,7 @@
 
                             <div  v-for="(photo,index) in filteredSearch" :key="photos.id"
                                 v-if="filteredSearch.length !== 0">
-                                <p>{{photo.title}}</p>
+                                <p class="font-semibold">{{photo.title}}</p>
                                 <img class="rounded shadow-sm my-3" :src="photo.src" @click="expandPic(photo.src)">
                                 <!-- show icon -->
                                 <div class="flex flex-row justify-end space-x-1">
